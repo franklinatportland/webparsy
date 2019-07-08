@@ -43,31 +43,7 @@ jobs:
             type: string
             transform: trim
             as: agentForServiceOfProcess
-        - object:
-            - many:
-                as: addresses
-                selector: table.EntityTable > tbody > tr
-                element:
-                  - text:
-                      selector: td:nth-child(1)
-                      type: string
-                      transform: trim
-                      as: entityNumber
-        - object:
-            - many:
-                as: shareholders
-                selector: table.EntityTable > tbody > tr
-                element:
-                  - text:
-                      selector: td:nth-child(1)
-                      type: string
-                      transform: trim
-                      as: entityNumber
-
-        - transform:
-            code: transform.js
-
-
+          
 
   report:
     steps:
