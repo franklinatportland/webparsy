@@ -1,0 +1,99 @@
+version: 1
+jobs:
+  main:
+    browser:
+      width: 1200
+      height: 3000
+      scaleFactor: 1
+      timeout: 10000
+      delay: 0
+    steps:
+    - goto: https://businesssearch.sos.ca.gov/CBS/SearchResults?filing=False&SearchType=CORP&SearchCriteria=Harrods&SearchSubType=Keyword
+#    - goto: https://businesssearch.sos.ca.gov/CBS/SearchResults?filing=False&SearchType=NUMBER&SearchCriteria=C2479096&SearchSubType=Keyword
+    - screenshot:
+        path: ./output/search_results.png
+    - pdf:
+        path: ./output/search_results.pdf
+        format: A4
+    - many:
+        as: searchResults
+        selector: table.EntityTable > tbody > tr
+        element:
+        - text:
+            selector: td:nth-child(1)
+            type: string
+            transform: trim
+            as: entityNumber
+        - text:
+            selector: td:nth-child(2)
+            type: string
+            as: registrationDate
+        - text:
+            selector: button
+            type: string
+            as: entityName
+            transform: trim
+        - text:
+            selector: td:nth-child(5)
+            type: string
+            transform: trim
+            as: jurisdiction
+        - text:
+            selector: td:nth-child(6)
+            type: string
+            transform: trim
+            as: agentForServiceOfProcess
+        - object:
+            - many:
+                as: addresses
+                selector: table.EntityTable > tbody > tr
+                element:
+                  - text:
+                      selector: td:nth-child(1)
+                      type: string
+                      transform: trim
+                      as: entityNumber
+        - object:
+            - many:
+                as: shareholders
+                selector: table.EntityTable > tbody > tr
+                element:
+                  - text:
+                      selector: td:nth-child(1)
+                      type: string
+                      transform: trim
+                      as: entityNumber
+
+        - transform:
+            code: transform.js
+
+
+
+  report:
+    steps:
+      - goto: https://businesssearch.sos.ca.gov/CBS/SearchResults?filing=False&SearchType=NUMBER&SearchCriteria=C2479096
+      - screenshot:
+          path: ./output/report.png
+      - pdf:
+          path: ./output/report.pdf
+          format: A4
+      - click: button.btn-link
+      - screenshot:
+          path: company_details.png
+      - text:
+          selector: #maincontent .row:nth-child(4) div:nth-child(2)
+          type: string
+          as: type
+      - text:
+          selector: #maincontent .row:nth-child(6) div:nth-child(2)
+          type: string
+          as: registeredAgentAddress
+      - text:
+          selector: #maincontent .row:nth-child(7) div:nth-child(2)
+          type: string
+          as: entityAddress
+      - text:
+          selector: #maincontent .row:nth-child(8) div:nth-child(2)
+          type: string
+          as: entityMailingAddress
+

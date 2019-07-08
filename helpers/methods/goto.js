@@ -1,8 +1,9 @@
 const schema = {
-  method: 'goto',
-  process: (flags, page, params, html) => {
-    return null
-  }
-}
+    method: 'goto',
+    puppeteer: true,
+    process: (flags, page, params, html) => {
+        return null;
+    }
+};
 
-module.exports = schema
+module.exports = schema;

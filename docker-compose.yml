@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  puppeteer:
+    build: .
+    volumes:
+    # mount code and output directories into the container
+    - ./output:/usr/src/app/output
+#    - ./:/usr/src/app
+    shm_size: 1gb #512M
+
+    command: ["npm", "start"]
+#    command: ["node", "cli.js", "examples/sos-california.yml", "--DEBUG=webparsy:*"]
+

@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer')
-const debug = require('debug')('webparsy')
+const debug = require('debug')('webparsy:index')
 
 const definition = require('./helpers/definition')
 const steps = require('./helpers/steps')

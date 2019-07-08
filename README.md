@@ -1,5 +1,18 @@
 # WebParsy [![CircleCI](https://circleci.com/gh/joseconstela/webparsy.svg?style=svg)](https://circleci.com/gh/joseconstela/webparsy) [![Greenkeeper badge](https://badges.greenkeeper.io/joseconstela/webparsy.svg)](https://greenkeeper.io/)
 
+Franklin's fork:
+- Added sos-california.yml to experiment with declarative parsing.
+- Added Dockerfile and docker-compose.yml
+
+Run with:
+
+`DEBUG=webparsy:* node cli.js examples/sos-california.yml`
+
+OR
+
+`docker-compose up --build`
+
+-------------------------------
 > WebParsy is a NodeJS library and cli which allows to scrape websites using [Puppeteer](https://github.com/GoogleChrome/puppeteer) ([or not](#goto)) and [YAML definitions](https://en.wikipedia.org/wiki/YAML)
 
 ```yaml

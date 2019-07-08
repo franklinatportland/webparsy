@@ -15,7 +15,8 @@
     "web scraper"
   ],
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "start": "DEBUG=webparsy:* node cli.js examples/sos-california.yml"
   },
   "bin": {
     "webparsy": "cli.js"
